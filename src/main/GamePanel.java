@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entity.Player;
 import entity.PlayerGun;
+import entity.PlayerBullet;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
 	public PlayerGun playerGun = new PlayerGun(this, keyH);
+	public PlayerBullet playerBullet = new PlayerBullet(this, keyH);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -74,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		player.update();
 		playerGun.update();
+		playerBullet.update();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -81,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		player.draw(g2);
 		playerGun.draw(g2);
+		playerBullet.draw(g2);
 		g2.dispose();
 		
 	}
