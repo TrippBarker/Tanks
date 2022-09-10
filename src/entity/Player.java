@@ -14,8 +14,8 @@ public class Player extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 
-	public final int screenX;
-	public final int screenY;
+	public int screenX;
+	public int screenY;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -33,8 +33,8 @@ public class Player extends Entity{
 
 	public void setDefaultValues() {
 		// Defines starting position
-		worldX = gp.tileSize * 10;
-		worldY = gp.tileSize * 10;
+		screenX = gp.tileSize * 10;
+		screenY = gp.tileSize * 10;
 		// Defines how many pixels object moves per refresh
 		speed = 4;
 		// Defines starting direction
@@ -78,16 +78,16 @@ public class Player extends Entity{
 			if(collisionOn == false) {
 				switch(direction) {
 				case "up":
-					worldY -= speed;
+					screenY -= speed;
 					break;
 				case "down":
-					worldY += speed;
+					screenY += speed;
 					break;
 				case "left":
-					worldX -= speed;
+					screenX -= speed;
 					break;
 				case "right":
-					worldX += speed;
+					screenX += speed;
 					break;
 				}
 			}

@@ -16,6 +16,8 @@ public class PlayerBullet extends Entity{
 	
 	public int screenX;
 	public int screenY;
+	public String firingDir;
+	public boolean firing = false;
 	
 	public PlayerBullet(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -33,10 +35,10 @@ public class PlayerBullet extends Entity{
 	
 	public void setDefaultValues() {
 		// Defines starting position
-		worldX = gp.tileSize * 10;
-		worldY = gp.tileSize * 10;
+		screenX = gp.tileSize - (gp.tileSize *2);
+		screenY = 0;
 		// Defines how many pixels object moves per refresh
-		speed = 4;
+		speed = 6;
 		// Defines starting direction
 		direction = "right";
 	}
@@ -57,50 +59,79 @@ public class PlayerBullet extends Entity{
 	}
 	
 	public void update() {
-		if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
-			if (keyH.fireUp) {
-				direction = "up";
-			} else if (keyH.fireDown) {
-				direction = "down";
-			} else if (keyH.fireLeft) {
-				direction = "left";
-			} else if (keyH.fireRight) {
-				direction = "right";
-			}
-			
-			switch(direction) {
+		if (firing) {
+			switch(firingDir) {
 			case "up":
-				worldY -= speed;
-				screenX = gp.screenHeight / 2 + (gp.tileSize / 2 * 2) + (gp.tileSize / 2);
-				screenY = gp.screenHeight / 2 - (gp.tileSize) - (gp.tileSize / 2);
+				screenY -= speed;
 				break;
 			case "down":
-				worldY += speed;
-				screenX = gp.screenHeight / 2 + (gp.tileSize / 2 * 2) + (gp.tileSize / 2);
-				screenY = gp.screenHeight / 2 + (gp.tileSize / 2);
+				screenY += speed;
 				break;
 			case "left":
-				worldX -= speed;
-				screenX = gp.screenHeight / 2 + (gp.tileSize / 2);
-				screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+				screenX -= speed;
 				break;
 			case "right":
-				worldX += speed;
-				screenX = gp.screenHeight / 2 + (gp.tileSize * 2) + (gp.tileSize / 2);
-				screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
-				break;
+				screenX += speed;
 			}
 			
-			spriteCounter++;
-			if(spriteCounter > 15) {
-				if(spriteNum == 1) {
-					spriteNum = 2;
-				} else if (spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
+			if (screenY < gp.tileSize - (gp.tileSize * 2) ||
+				screenX < gp.tileSize - (gp.tileSize * 2) ||
+				screenY > gp.tileSize * gp.maxScreenRow + gp.tileSize||
+				screenX > gp.tileSize * gp.maxScreenCol + gp.tileSize ||
+				collisionOn) {
+				firing = false;
+				screenX = gp.tileSize - (gp.tileSize *2);
+				screenY = 0;
 			}
 		}
+		
+		if(!firing) {
+			if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
+				firing = true;
+				if (keyH.fireUp) {
+					direction = "up";
+				} else if (keyH.fireDown) {
+					direction = "down";
+				} else if (keyH.fireLeft) {
+					direction = "left";
+				} else if (keyH.fireRight) {
+					direction = "right";
+				}
+				switch(direction) {
+				case "up":
+					screenX = gp.player.screenX;
+					screenY = gp.player.screenY - (gp.tileSize / 2);
+					firingDir = "up";
+					break;
+				case "down":
+					screenX = gp.player.screenX;
+					screenY = gp.player.screenY + (gp.tileSize / 2);
+					firingDir = "down";
+					break;
+				case "left":
+					screenX = gp.player.screenX - (gp.tileSize / 2);
+					screenY = gp.player.screenY;
+					firingDir = "left";
+					break;
+				case "right":
+					screenX = gp.player.screenX + (gp.tileSize / 2);
+					screenY = gp.player.screenY;
+					firingDir = "right";
+					break;
+				}
+				
+				spriteCounter++;
+				if(spriteCounter > 15) {
+					if(spriteNum == 1) {
+						spriteNum = 2;
+					} else if (spriteNum == 2) {
+						spriteNum = 1;
+					}
+					spriteCounter = 0;
+				}
+			}
+		}
+		
 	}
 	
 	public void draw(Graphics2D g2) {

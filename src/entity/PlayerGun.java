@@ -14,8 +14,9 @@ public class PlayerGun extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 	
-	public final int screenX;
-	public final int screenY;
+	public int screenX;
+	public int screenY;
+	public String fireDirection = "left";
 	
 	public PlayerGun(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -33,8 +34,8 @@ public class PlayerGun extends Entity{
 	
 	public void setDefaultValues() {
 		// Defines starting position
-		worldX = gp.tileSize * 10;
-		worldY = gp.tileSize * 10;
+		screenX = gp.tileSize * 10;
+		screenY = gp.tileSize * 10;
 		// Defines how many pixels object moves per refresh
 		speed = 4;
 		// Defines starting direction
@@ -57,29 +58,29 @@ public class PlayerGun extends Entity{
 	}
 	
 	public void update() {
-		if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
-			if (keyH.fireUp) {
+		if (keyH.moveUp == true || keyH.moveDown == true || keyH.moveLeft == true || keyH.moveRight == true) {
+			if (keyH.moveUp) {
 				direction = "up";
-			} else if (keyH.fireDown) {
+			} else if (keyH.moveDown) {
 				direction = "down";
-			} else if (keyH.fireLeft) {
+			} else if (keyH.moveLeft) {
 				direction = "left";
-			} else if (keyH.fireRight) {
+			} else if (keyH.moveRight) {
 				direction = "right";
 			}
 			
 			switch(direction) {
 			case "up":
-				worldY -= speed;
+				screenY -= speed;
 				break;
 			case "down":
-				worldY += speed;
+				screenY += speed;
 				break;
 			case "left":
-				worldX -= speed;
+				screenX -= speed;
 				break;
 			case "right":
-				worldX += speed;
+				screenX += speed;
 				break;
 			}
 			
@@ -93,11 +94,22 @@ public class PlayerGun extends Entity{
 				spriteCounter = 0;
 			}
 		}
+		if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
+			if (keyH.fireUp) {
+				fireDirection = "up";
+			} else if (keyH.fireDown) {
+				fireDirection = "down";
+			} else if (keyH.fireLeft) {
+				fireDirection = "left";
+			} else if (keyH.fireRight) {
+				fireDirection = "right";
+			}
+		}
 	}
 	
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
-		switch(direction) {
+		switch(fireDirection) {
 		case "up":
 			if (spriteNum == 1) {
 				image = up1;
