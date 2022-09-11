@@ -33,11 +33,9 @@ public class PlayerGun extends Entity{
 	}
 	
 	public void setDefaultValues() {
-		// Defines starting position
-		screenX = gp.tileSize * 10;
-		screenY = gp.tileSize * 10;
-		// Defines how many pixels object moves per refresh
-		speed = 4;
+		// pair position with the tank body
+		screenX = gp.player.screenX;
+		screenY = gp.player.screenY;
 		// Defines starting direction
 		direction = "right";
 	}
@@ -58,42 +56,8 @@ public class PlayerGun extends Entity{
 	}
 	
 	public void update() {
-		if (keyH.moveUp == true || keyH.moveDown == true || keyH.moveLeft == true || keyH.moveRight == true) {
-			if (keyH.moveUp) {
-				direction = "up";
-			} else if (keyH.moveDown) {
-				direction = "down";
-			} else if (keyH.moveLeft) {
-				direction = "left";
-			} else if (keyH.moveRight) {
-				direction = "right";
-			}
-			
-			switch(direction) {
-			case "up":
-				screenY -= speed;
-				break;
-			case "down":
-				screenY += speed;
-				break;
-			case "left":
-				screenX -= speed;
-				break;
-			case "right":
-				screenX += speed;
-				break;
-			}
-			
-			spriteCounter++;
-			if(spriteCounter > 15) {
-				if(spriteNum == 1) {
-					spriteNum = 2;
-				} else if (spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
-			}
-		}
+		screenY = gp.player.screenY;
+		screenX = gp.player.screenX;
 		if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
 			if (keyH.fireUp) {
 				fireDirection = "up";

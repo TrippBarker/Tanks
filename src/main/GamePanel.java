@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entity.Player;
 import entity.PlayerGun;
+import tile.TileManager;
 import entity.PlayerBullet;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -30,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
 	
+	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
@@ -82,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		tileM.draw(g2);
 		player.draw(g2);
 		playerGun.draw(g2);
 		playerBullet.draw(g2);
