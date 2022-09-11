@@ -33,12 +33,12 @@ public class Player extends Entity{
 
 	public void setDefaultValues() {
 		// Defines starting position
-		screenX = gp.tileSize * 10;
-		screenY = gp.tileSize * 10;
+		screenX = gp.tileSize * 13;
+		screenY = gp.tileSize * 9;
 		// Defines how many pixels object moves per refresh
 		speed = 4;
 		// Defines starting direction
-		direction = "right";
+		direction = "left";
 	}
 
 	public void getPlayerImage() {
