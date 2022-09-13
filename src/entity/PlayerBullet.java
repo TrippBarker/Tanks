@@ -14,6 +14,7 @@ public class PlayerBullet extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 	String firingDir;
+	int timeTilNextFire;
 	public boolean firing = false;
 	
 	public PlayerBullet(GamePanel gp, KeyHandler keyH) {
@@ -34,6 +35,7 @@ public class PlayerBullet extends Entity{
 		speed = 6;
 		// Defines starting direction
 		direction = "right";
+		timeTilNextFire = 0;
 	}
 	
 	public void getPlayerImage() {
@@ -52,6 +54,9 @@ public class PlayerBullet extends Entity{
 	}
 	
 	public void update() {
+		if (timeTilNextFire > 0) {
+			timeTilNextFire--;
+		}
 		if (firing) {
 			switch(firingDir) {
 			case "up":
@@ -75,8 +80,9 @@ public class PlayerBullet extends Entity{
 			}
 		}
 		
-		if(!firing) {
+		if(!firing && timeTilNextFire == 0) {
 			if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
+				timeTilNextFire = 50;
 				firing = true;
 				if (keyH.fireUp) {
 					direction = "up";
