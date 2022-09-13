@@ -13,21 +13,14 @@ import main.KeyHandler;
 public class PlayerBullet extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
-	
-	public int screenX;
-	public int screenY;
-	public String firingDir;
+	String firingDir;
 	public boolean firing = false;
 	
 	public PlayerBullet(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
 		
-		// Defines where on the screen the sprite should be painted
-		screenX = gp.tileSize - (gp.tileSize *2);
-		screenY = 0;
-		
-		solidArea = new Rectangle(20, 20, 20, 20);
+		solidArea = new Rectangle(21, 21, 12, 12);
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -73,11 +66,9 @@ public class PlayerBullet extends Entity{
 			case "right":
 				screenX += speed;
 			}
-			if (screenY < gp.tileSize - (gp.tileSize * 2) ||
-				screenX < gp.tileSize - (gp.tileSize * 2) ||
-				screenY > gp.tileSize * gp.maxScreenRow + gp.tileSize||
-				screenX > gp.tileSize * gp.maxScreenCol + gp.tileSize ||
-				collisionOn) {
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
+			if (collisionOn) {
 				firing = false;
 				screenX = gp.tileSize - (gp.tileSize *2);
 				screenY = 0;
@@ -85,7 +76,6 @@ public class PlayerBullet extends Entity{
 		}
 		
 		if(!firing) {
-			collisionOn = false;
 			if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
 				firing = true;
 				if (keyH.fireUp) {

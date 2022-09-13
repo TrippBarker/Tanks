@@ -37,7 +37,7 @@ public class CollisionChecker {
 		
 		int tileNum1 = 0, tileNum2 = 0;
 		boolean collisionWithEnt = false;
-		
+		System.out.println(entityRightX);
 		switch(entity.direction) {
 		case "up":
 			entityTopRow = (entityTopY - entity.speed)/gp.tileSize;
@@ -72,8 +72,6 @@ public class CollisionChecker {
 			}
 			break;
 		}
-		System.out.println("good " + entityRightX);
-		System.out.println("bad " + evilLeftX);
 		if (gp.tileM.tiles[tileNum1].collision == true || gp.tileM.tiles[tileNum2].collision == true || collisionWithEnt) {
 			entity.collisionOn = true;
 		}
