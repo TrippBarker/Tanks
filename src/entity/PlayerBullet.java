@@ -27,7 +27,7 @@ public class PlayerBullet extends Entity{
 		screenX = gp.tileSize - (gp.tileSize *2);
 		screenY = 0;
 		
-		solidArea = new Rectangle(0, 0, 0, 0);
+		solidArea = new Rectangle(20, 20, 20, 20);
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -73,7 +73,6 @@ public class PlayerBullet extends Entity{
 			case "right":
 				screenX += speed;
 			}
-			
 			if (screenY < gp.tileSize - (gp.tileSize * 2) ||
 				screenX < gp.tileSize - (gp.tileSize * 2) ||
 				screenY > gp.tileSize * gp.maxScreenRow + gp.tileSize||
@@ -86,6 +85,7 @@ public class PlayerBullet extends Entity{
 		}
 		
 		if(!firing) {
+			collisionOn = false;
 			if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
 				firing = true;
 				if (keyH.fireUp) {

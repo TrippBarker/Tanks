@@ -25,7 +25,7 @@ public class EvilTank extends Entity{
 		screenX = gp.screenWidth;
 		screenY = gp.screenHeight;
 
-		solidArea = new Rectangle(0, 0, 0, 0);
+		solidArea = new Rectangle(9, 9, 36, 36);
 
 		setDefaultValues();
 		getPlayerImage();

@@ -14,9 +14,6 @@ public class Player extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 
-	public int screenX;
-	public int screenY;
-
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -25,7 +22,7 @@ public class Player extends Entity{
 		screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
 		screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
-		solidArea = new Rectangle(0, 0, 0, 0);
+		solidArea = new Rectangle(9, 9, 36, 36);
 
 		setDefaultValues();
 		getPlayerImage();
@@ -73,7 +70,7 @@ public class Player extends Entity{
 			}
 
 			collisionOn = false;
-			// gp.cChecker.checkTile(this);
+			gp.cChecker.checkTile(this);
 
 			if(collisionOn == false) {
 				switch(direction) {
