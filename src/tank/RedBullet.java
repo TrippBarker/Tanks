@@ -27,6 +27,7 @@ public class RedBullet extends Bullet{
 		// Defines starting direction
 		direction = "right";
 		timeTilNextFire = 0;
+		tankName = gp.redTank;
 	}
 
 }

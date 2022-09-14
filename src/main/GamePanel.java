@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GreenGun greenGun = new GreenGun(this, keyH);
 	public RedTank redTank = new RedTank(this, keyH, "redTank");
 	public RedGun redGun = new RedGun(this, keyH);
+	public RedBullet redBullet = new RedBullet(this, keyH);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -81,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable{
 		greenGun.update();
 		redTank.update();
 		redGun.update();
+		redBullet.update();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
 		greenGun.draw(g2);
 		redTank.draw(g2);
 		redGun.draw(g2);
+		redBullet.draw(g2);
 		g2.dispose();
 		
 	}

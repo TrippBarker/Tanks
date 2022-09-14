@@ -18,6 +18,7 @@ public abstract class Bullet {
 	int timeTilNextFire;
 	public boolean firing = false;
 	Rectangle solidArea;
+	public Tank tankName;
 	
 	int screenX;
 	int screenY;
@@ -27,17 +28,55 @@ public abstract class Bullet {
 	
 	public void getPlayerImage() {
 		try {
-			up = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedUp1.png"));
+			up = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedUp2.png"));
 			down = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedDown2.png"));
-			left = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedLeft1.png"));
-			right = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedRight1.png"));
+			left = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedLeft2.png"));
+			right = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedRight2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void update() {
-		
+		if (firing) {
+			screenY = tankName.screenY;
+			screenX = tankName.screenX;
+		}
+		if (keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
+			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) {
+				if (this instanceof RedBullet) {
+					if (keyH.redFireUp) {
+						direction = "up";
+						firing = true;
+					} else if (keyH.redFireDown) {
+						direction = "down";
+						firing = true;
+					} else if (keyH.redFireLeft) {
+						direction = "left";
+						firing = true;
+					} else if (keyH.redFireRight) {
+						direction = "right";
+						firing = true;
+					}
+				}
+				
+				if (this instanceof GreenBullet) {
+					if (keyH.greenFireUp) {
+						direction = "up";
+						firing = true;
+					} else if (keyH.greenFireDown) {
+						direction = "down";
+						firing = true;
+					} else if (keyH.greenFireLeft) {
+						direction = "left";
+						firing = true;
+					} else if (keyH.greenFireRight) {
+						direction = "right";
+						firing = true;
+					}
+				}
+				
+			}
 	}
 	
 	public void draw(Graphics2D g2) {
