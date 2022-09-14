@@ -40,14 +40,14 @@ public class PlayerBullet extends Entity{
 	
 	public void getPlayerImage() {
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletUp.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletUp.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletDown.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletDown.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletLeft.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletLeft.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletRight.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bulletRight.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedUp1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedUp2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedDown1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedDown2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedLeft1.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedLeft2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedRight1.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/bullet/firedRight2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -86,6 +86,7 @@ public class PlayerBullet extends Entity{
 				firing = true;
 				if (keyH.fireUp) {
 					direction = "up";
+					
 				} else if (keyH.fireDown) {
 					direction = "down";
 				} else if (keyH.fireLeft) {
@@ -115,16 +116,6 @@ public class PlayerBullet extends Entity{
 					firingDir = "right";
 					break;
 				}
-				
-				spriteCounter++;
-				if(spriteCounter > 15) {
-					if(spriteNum == 1) {
-						spriteNum = 2;
-					} else if (spriteNum == 2) {
-						spriteNum = 1;
-					}
-					spriteCounter = 0;
-				}
 			}
 		}
 		
@@ -134,32 +125,16 @@ public class PlayerBullet extends Entity{
 		BufferedImage image = null;
 		switch(direction) {
 		case "up":
-			if (spriteNum == 1) {
-				image = up1;
-			} else {
-				image = up2;
-			}
+			image = up2;
 			break;
 		case "down":
-			if (spriteNum == 1) {
-				image = down1;
-			} else {
-				image = down2;
-			}
+			image = down2;
 			break;
 		case "left":
-			if (spriteNum == 1) {
-				image = left1;
-			} else {
-				image = left2;
-			}
+			image = left2;
 			break;
 		case "right":
-			if (spriteNum == 1) {
-				image = right1;
-			} else {
-				image = right2;
-			}
+			image = right2;
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
