@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class Gun {
+public abstract class Gun {
 	GamePanel gp;
 	KeyHandler keyH;
 	

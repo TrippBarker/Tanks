@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class Tank {
+public abstract class Tank {
 	public int screenX, screenY;
 	public int speed;
 	public String name;
