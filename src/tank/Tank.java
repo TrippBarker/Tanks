@@ -44,8 +44,9 @@ public abstract class Tank {
 	
 	public void update () {
 
-		if (keyH.redMoveUp == true || keyH.redMoveDown == true || keyH.redMoveLeft == true || keyH.redMoveRight == true ||
-			keyH.greenMoveUp == true || keyH.greenMoveDown == true || keyH.greenMoveLeft == true || keyH.greenMoveRight == true) {
+		if ((keyH.redMoveUp == true || keyH.redMoveDown == true || keyH.redMoveLeft == true || keyH.redMoveRight == true ||
+			keyH.greenMoveUp == true || keyH.greenMoveDown == true || keyH.greenMoveLeft == true || keyH.greenMoveRight == true) &&
+			lifePoints > 0) {
 			if (this instanceof RedTank) {
 				if (keyH.redMoveUp) {
 					direction = "up";

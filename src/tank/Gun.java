@@ -19,6 +19,7 @@ public abstract class Gun {
 	public String fireDirection;
 	public String name;
 	public Tank tankName;
+	public int lifePoints = 3;
 	
 	public BufferedImage up, down, left, right;
 	
@@ -36,8 +37,9 @@ public abstract class Gun {
 	public void update() {
 		screenY = tankName.screenY;
 		screenX = tankName.screenX;
-		if (keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
-			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) {
+		if ((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
+			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) &&
+			lifePoints > 0) {
 			if (this instanceof RedGun) {
 				if (keyH.redFireUp) {
 					fireDirection = "up";

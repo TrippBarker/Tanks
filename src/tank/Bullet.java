@@ -20,7 +20,7 @@ public abstract class Bullet {
 	public Rectangle solidArea;
 	public Tank tankName;
 	public int timeTilNextShot = 0;
-	
+	public int lifePoints = 3;
 	public int screenX;
 	public int screenY;
 	public int speed;
@@ -57,8 +57,9 @@ public abstract class Bullet {
 			}
 		}
 		
-		if ((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
-			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) && timeTilNextShot <= 0 && !firing) {
+		if (((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
+			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true))
+				&& timeTilNextShot <= 0 && !firing && lifePoints > 0) {
 				if (this instanceof RedBullet) {
 					if (keyH.redFireUp) {
 						direction = "up";

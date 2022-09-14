@@ -75,8 +75,12 @@ public class BulletHitChecker {
 			collisionWithEnt = true;
 			if (bullet instanceof RedBullet) {
 				gp.greenTank.lifePoints--;
+				gp.greenGun.lifePoints--;
+				gp.greenBullet.lifePoints--;
 			} else {
 				gp.redTank.lifePoints--;
+				gp.redGun.lifePoints--;
+				gp.redBullet.lifePoints--;
 			}
 		}
 		if (gp.tileM.tiles[tileNum1].flyOver == false || gp.tileM.tiles[tileNum2].flyOver == false || collisionWithEnt) {
