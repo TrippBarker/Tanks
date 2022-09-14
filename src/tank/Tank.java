@@ -1,4 +1,4 @@
-package entity;
+package tank;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -10,49 +10,36 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class Player extends Entity{
+public class Tank {
+	public int screenX, screenY;
+	public int speed;
+	public String name;
 	GamePanel gp;
 	KeyHandler keyH;
-
-	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
-		this.keyH = keyH;
-
-		// Defines where on the screen the sprite should be painted
-		screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-		screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
-
-		solidArea = new Rectangle(9, 9, 36, 36);
-
-		setDefaultValues();
-		getPlayerImage();
-	}
-
-	public void setDefaultValues() {
-		// Defines starting position
-		screenX = gp.tileSize * 13;
-		screenY = gp.tileSize * 9;
-		// Defines how many pixels object moves per refresh
-		speed = 4;
-		// Defines starting direction
-		direction = "left";
-	}
-
+	
+	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public String direction;
+	
+	public int spriteCounter = 0;
+	public int spriteNum = 1;
+	public Rectangle solidArea;
+	public boolean collisionOn = false;
+	
 	public void getPlayerImage() {
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/sprites" + "/moveUp1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveUp2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveDown1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveDown2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveLeft1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveLeft2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveRight1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/moveRight2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveUp1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveUp2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveDown1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveDown2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveLeft1.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveLeft2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveRight1.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/moveRight2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void update () {
 
 		if (keyH.moveUp == true || keyH.moveDown == true || keyH.moveLeft == true || keyH.moveRight == true) {
@@ -135,5 +122,4 @@ public class Player extends Entity{
 			}
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 		}
-
-	}
+}

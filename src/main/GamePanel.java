@@ -2,14 +2,14 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
+import 
+java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.*;
+import tank.*;
 import tile.TileManager;
-import entity.PlayerBullet;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -34,12 +34,13 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
-	public Player player = new Player(this, keyH);
-	public PlayerGun playerGun = new PlayerGun(this, keyH);
-	public PlayerBullet playerBullet = new PlayerBullet(this, keyH);
+	public GreenTank greenTank = new GreenTank(this, keyH, "greenTank");
+	public RedTank redTank = new RedTank(this, keyH, "redTank");
+	//public PlayerGun playerGun = new PlayerGun(this, keyH);
+	//public PlayerBullet playerBullet = new PlayerBullet(this, keyH);
 	
-	public EvilTank evilTank = new EvilTank(this, keyH);
-	public EvilGun evilGun = new EvilGun(this, keyH);
+	//public EvilTank evilTank = new EvilTank(this, keyH);
+	//public EvilGun evilGun = new EvilGun(this, keyH);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -79,20 +80,22 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void update() {
-		player.update();
-		playerGun.update();
-		playerBullet.update();
+		greenTank.update();
+		redTank.update();
+		//playerGun.update();
+		//playerBullet.update();
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		tileM.draw(g2);
-		player.draw(g2);
-		playerGun.draw(g2);
-		playerBullet.draw(g2);
-		evilTank.draw(g2);
-		evilGun.draw(g2);
+		greenTank.draw(g2);
+		redTank.draw(g2);
+		//playerGun.draw(g2);
+		//playerBullet.draw(g2);
+		//evilTank.draw(g2);
+		//evilGun.draw(g2);
 		g2.dispose();
 		
 	}

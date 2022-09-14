@@ -1,7 +1,6 @@
 package main;
 
-import entity.Entity;
-import entity.EvilTank;
+import tank.Tank;
 
 public class CollisionChecker {
 	
@@ -11,69 +10,46 @@ public class CollisionChecker {
 		this. gp = gp;
 	}
 	
-	public void checkTile(Entity entity) {
+	public void checkTile(Tank tank) {
 		
-		EvilTank evilTank = gp.evilTank;
 		
-		int entityLeftX = entity.screenX + entity.solidArea.x;
-		int entityRightX = entity.screenX + entity.solidArea.x + entity.solidArea.width;
-		int entityTopY = entity.screenY + entity.solidArea.y;
-		int entityBottomY = entity.screenY + entity.solidArea.y + entity.solidArea.height;
+		int tankLeftX = tank.screenX + tank.solidArea.x;
+		int tankRightX = tank.screenX + tank.solidArea.x + tank.solidArea.width;
+		int tankTopY = tank.screenY + tank.solidArea.y;
+		int tankBottomY = tank.screenY + tank.solidArea.y + tank.solidArea.height;
 		
-		int entityLeftCol = entityLeftX/gp.tileSize;
-		int entityRightCol = entityRightX/gp.tileSize;
-		int entityTopRow = entityTopY/gp.tileSize;
-		int entityBottomRow = entityBottomY/gp.tileSize;
-		
-		int evilLeftX = evilTank.screenX + evilTank.solidArea.x;
-		int evilRightX = evilTank.screenX + evilTank.solidArea.x + evilTank.solidArea.width;
-		int evilTopY = evilTank.screenY + evilTank.solidArea.y;
-		int evilBottomY = evilTank.screenY + evilTank.solidArea.y + evilTank.solidArea.height;
-		
-		int evilLeftCol = evilLeftX/gp.tileSize;
-		int evilRightCol = evilRightX/gp.tileSize;
-		int evilTopRow = evilTopY/gp.tileSize;
-		int evilBottomRow = evilBottomY/gp.tileSize;
+		int tankLeftCol = tankLeftX/gp.tileSize;
+		int tankRightCol = tankRightX/gp.tileSize;
+		int tankTopRow = tankTopY/gp.tileSize;
+		int tankBottomRow = tankBottomY/gp.tileSize;
 		
 		int tileNum1 = 0, tileNum2 = 0;
 		boolean collisionWithEnt = false;
-		System.out.println(entityRightX);
-		switch(entity.direction) {
+		System.out.println(tankRightX);
+		switch(tank.direction) {
 		case "up":
-			entityTopRow = (entityTopY - entity.speed)/gp.tileSize;
-			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-			if (entityTopY <= evilBottomY && entityRightX >= evilLeftX && entityLeftX <= evilRightX && entityBottomY > evilTopY) {
-				collisionWithEnt = true;
-			}
+			tankTopRow = (tankTopY - tank.speed)/gp.tileSize;
+			tileNum1 = gp.tileM.mapTileNum[tankLeftCol][tankTopRow];
+			tileNum2 = gp.tileM.mapTileNum[tankRightCol][tankTopRow];
 			break;
 		case "down":
-			entityBottomRow = (entityBottomY + entity.speed)/gp.tileSize;
-			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-			if (entityBottomY >= evilTopY && entityRightX >= evilLeftX && entityLeftX <= evilRightX && entityTopY < evilBottomY) {
-				collisionWithEnt = true;
-			}
+			tankBottomRow = (tankBottomY + tank.speed)/gp.tileSize;
+			tileNum1 = gp.tileM.mapTileNum[tankLeftCol][tankBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[tankRightCol][tankBottomRow];
 			break;
 		case "left":
-			entityLeftCol = (entityLeftX - entity.speed)/gp.tileSize;
-			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-			if (entityLeftX <= evilRightX && entityTopY <= evilBottomY && entityBottomY >= evilTopY && entityRightX > evilLeftX) {
-				collisionWithEnt = true;
-			}
+			tankLeftCol = (tankLeftX - tank.speed)/gp.tileSize;
+			tileNum1 = gp.tileM.mapTileNum[tankLeftCol][tankTopRow];
+			tileNum2 = gp.tileM.mapTileNum[tankLeftCol][tankBottomRow];
 			break;
 		case "right":
-			entityRightCol = (entityRightX + entity.speed)/gp.tileSize;
-			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-			if (entityRightX >= evilLeftX && entityTopY <= evilBottomY && entityBottomY >= evilTopY && entityLeftX < evilRightX) {
-				collisionWithEnt = true;
-			}
+			tankRightCol = (tankRightX + tank.speed)/gp.tileSize;
+			tileNum1 = gp.tileM.mapTileNum[tankRightCol][tankTopRow];
+			tileNum2 = gp.tileM.mapTileNum[tankRightCol][tankBottomRow];
 			break;
 		}
 		if (gp.tileM.tiles[tileNum1].collision == true || gp.tileM.tiles[tileNum2].collision == true || collisionWithEnt) {
-			entity.collisionOn = true;
+			tank.collisionOn = true;
 		}
 	}
 }

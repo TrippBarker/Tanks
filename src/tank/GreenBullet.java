@@ -1,4 +1,4 @@
-package entity;
+package tank;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class PlayerBullet extends Entity{
+public class PlayerBullet extends Tank{
 	GamePanel gp;
 	KeyHandler keyH;
 	String firingDir;
