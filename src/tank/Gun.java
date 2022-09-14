@@ -36,21 +36,37 @@ public class Gun {
 	public void update() {
 		screenY = tankName.screenY;
 		screenX = tankName.screenX;
-		if (keyH.fireUp == true || keyH.fireDown == true || keyH.fireLeft == true || keyH.fireRight == true) {
-			if (keyH.fireUp) {
-				fireDirection = "up";
-			} else if (keyH.fireDown) {
-				fireDirection = "down";
-			} else if (keyH.fireLeft) {
-				fireDirection = "left";
-			} else if (keyH.fireRight) {
-				fireDirection = "right";
+		if (keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
+			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) {
+			if (this instanceof RedGun) {
+				if (keyH.redFireUp) {
+					fireDirection = "up";
+				} else if (keyH.redFireDown) {
+					fireDirection = "down";
+				} else if (keyH.redFireLeft) {
+					fireDirection = "left";
+				} else if (keyH.redFireRight) {
+					fireDirection = "right";
+				}
 			}
+			
+			if (this instanceof GreenGun) {
+				if (keyH.greenFireUp) {
+					fireDirection = "up";
+				} else if (keyH.greenFireDown) {
+					fireDirection = "down";
+				} else if (keyH.greenFireLeft) {
+					fireDirection = "left";
+				} else if (keyH.greenFireRight) {
+					fireDirection = "right";
+				}
+			}
+			
 		}
 	}
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
-		switch(direction) {
+		switch(fireDirection) {
 		case "up":
 			image = up;
 			break;
