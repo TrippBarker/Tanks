@@ -99,7 +99,6 @@ public class Tank {
 					screenX += speed;
 					break;
 				}
-				moving = false;
 			}
 
 			spriteCounter++;
@@ -118,34 +117,35 @@ public class Tank {
 			BufferedImage image = null;
 			switch(direction) {
 			case "up":
-				if (spriteNum == 1) {
+				if (spriteNum == 1 && moving) {
 					image = up1;
 				} else {
 					image = up2;
 				}
 				break;
 			case "down":
-				if (spriteNum == 1) {
+				if (spriteNum == 1 && moving) {
 					image = down1;
 				} else {
 					image = down2;
 				}
 				break;
 			case "left":
-				if (spriteNum == 1) {
+				if (spriteNum == 1 && moving) {
 					image = left1;
 				} else {
 					image = left2;
 				}
 				break;
 			case "right":
-				if (spriteNum == 1) {
+				if (spriteNum == 1 && moving) {
 					image = right1;
 				} else {
 					image = right2;
 				}
 				break;
 			}
+			moving = false;
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 		}
 }
