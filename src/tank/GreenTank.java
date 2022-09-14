@@ -23,7 +23,7 @@ public class GreenTank extends Tank{
 		// Defines starting direction
 		direction = "left";
 		// Defines hit box
-		solidArea = new Rectangle(9, 9, 36, 36);
+		solidArea = new Rectangle(9, 3, 36, 36);
 	}
 
 }

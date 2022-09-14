@@ -1,7 +1,6 @@
 package main;
 
 import tank.GreenTank;
-import tank.RedTank;
 import tank.Tank;
 
 public class CollisionChecker {
@@ -29,11 +28,6 @@ public class CollisionChecker {
 		int otherTankRightX = gp.greenTank.screenX + gp.greenTank.solidArea.x + gp.greenTank.solidArea.width;
 		int otherTankTopY = gp.greenTank.screenY + gp.greenTank.solidArea.y;
 		int otherTankBottomY = gp.greenTank.screenY + gp.greenTank.solidArea.y + gp.greenTank.solidArea.height;
-
-		int otherTankLeftCol = otherTankLeftX/gp.tileSize;
-		int otherTankRightCol = otherTankRightX/gp.tileSize;
-		int otherTankTopRow = otherTankTopY/gp.tileSize;
-		int otherTankBottomRow = otherTankBottomY/gp.tileSize;
 		
 		if(tank instanceof GreenTank) {
 			tankLeftX = gp.greenTank.screenX + gp.greenTank.solidArea.x;
@@ -50,11 +44,6 @@ public class CollisionChecker {
 			otherTankRightX = gp.redTank.screenX + gp.redTank.solidArea.x + gp.redTank.solidArea.width;
 			otherTankTopY = gp.redTank.screenY + gp.redTank.solidArea.y;
 			otherTankBottomY = gp.redTank.screenY + gp.redTank.solidArea.y + gp.redTank.solidArea.height;
-
-			otherTankLeftCol = otherTankLeftX/gp.tileSize;
-			otherTankRightCol = otherTankRightX/gp.tileSize;
-			otherTankBottomRow = otherTankBottomY/gp.tileSize;
-			otherTankTopRow = otherTankTopY/gp.tileSize;
 		}
 
 		int tileNum1 = 0, tileNum2 = 0;

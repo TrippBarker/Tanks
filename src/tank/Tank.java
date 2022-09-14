@@ -13,6 +13,7 @@ import main.KeyHandler;
 public abstract class Tank {
 	public int screenX, screenY;
 	public int speed;
+	public int lifePoints = 3;
 	public String name;
 	GamePanel gp;
 	KeyHandler keyH;

@@ -17,14 +17,16 @@ public abstract class Bullet {
 	String firingDir;
 	int timeTilNextFire;
 	public boolean firing = false;
-	Rectangle solidArea;
+	public Rectangle solidArea;
 	public Tank tankName;
+	public int timeTilNextShot = 0;
 	
-	int screenX;
-	int screenY;
-	int speed;
-	String direction;
+	public int screenX;
+	public int screenY;
+	public int speed;
+	public String direction;
 	public BufferedImage up, down, left, right;
+	public boolean collisionOn = false;
 	
 	public void getPlayerImage() {
 		try {
@@ -39,11 +41,24 @@ public abstract class Bullet {
 	
 	public void update() {
 		if (firing) {
-			screenY = tankName.screenY;
-			screenX = tankName.screenX;
+			switch (direction) {
+			case "up":
+				screenY -= speed;
+				break;
+			case "down":
+				screenY += speed;
+				break;
+			case "left":
+				screenX -= speed;
+				break;
+			case "right":
+				screenX += speed;
+				break;
+			}
 		}
-		if (keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
-			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) {
+		
+		if ((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
+			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) && timeTilNextShot <= 0 && !firing) {
 				if (this instanceof RedBullet) {
 					if (keyH.redFireUp) {
 						direction = "up";
@@ -57,6 +72,11 @@ public abstract class Bullet {
 					} else if (keyH.redFireRight) {
 						direction = "right";
 						firing = true;
+					}
+					if (firing) {
+						screenY = tankName.screenY;
+						screenX = tankName.screenX;
+						timeTilNextShot = 50;
 					}
 				}
 				
@@ -74,12 +94,43 @@ public abstract class Bullet {
 						direction = "right";
 						firing = true;
 					}
+					if (firing) {
+						screenY = tankName.screenY;
+						screenX = tankName.screenX;
+						timeTilNextShot = 50;
+					}
 				}
 				
 			}
+		collisionOn = false;
+		gp.bhChecker.checkTile(this);
+		
+		if(collisionOn) {
+			firing = false;
+			screenX = gp.tileSize - (gp.tileSize *2);
+			screenY = 0;
+		}
+
+		if(collisionOn == false && firing) {
+			switch(direction) {
+			case "up":
+				screenY -= speed;
+				break;
+			case "down":
+				screenY += speed;
+				break;
+			case "left":
+				screenX -= speed;
+				break;
+			case "right":
+				screenX += speed;
+				break;
+			}
+		}
 	}
 	
 	public void draw(Graphics2D g2) {
+		timeTilNextShot--;
 		BufferedImage image = null;
 		switch(direction) {
 		case "up":

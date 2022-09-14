@@ -42,9 +42,11 @@ public class TileManager {
 			tiles[3] = new Tile();
 			tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
 			tiles[3].collision = true;
+			tiles[3].flyOver = false;
 			
 			tiles[4] = new Tile();
 			tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
+			tiles[4].speedReduce = 2;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
