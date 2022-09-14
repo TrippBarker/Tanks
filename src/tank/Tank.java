@@ -16,6 +16,7 @@ public class Tank {
 	public String name;
 	GamePanel gp;
 	KeyHandler keyH;
+	boolean moving = false;
 	
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 	public String direction;
@@ -42,24 +43,48 @@ public class Tank {
 	
 	public void update () {
 
-		if (keyH.moveUp == true || keyH.moveDown == true || keyH.moveLeft == true || keyH.moveRight == true) {
-			if (keyH.moveUp) {
-				direction = "up";
-			}
-			else if (keyH.moveDown) {
-				direction = "down";
-			}
-			else if (keyH.moveLeft) {
-				direction = "left";
-			}
-			else if (keyH.moveRight) {
-				direction = "right";
+		if (keyH.redMoveUp == true || keyH.redMoveDown == true || keyH.redMoveLeft == true || keyH.redMoveRight == true ||
+			keyH.greenMoveUp == true || keyH.greenMoveDown == true || keyH.greenMoveLeft == true || keyH.greenMoveRight == true) {
+			if (this instanceof RedTank) {
+				if (keyH.redMoveUp) {
+					direction = "up";
+					moving = true;
+				}
+				else if (keyH.redMoveDown) {
+					direction = "down";
+					moving = true;
+				}
+				else if (keyH.redMoveLeft) {
+					direction = "left";
+					moving = true;
+				}
+				else if (keyH.redMoveRight) {
+					direction = "right";
+					moving = true;
+				}
+			} else if (this instanceof GreenTank) {
+				if (keyH.greenMoveUp) {
+					direction = "up";
+					moving = true;
+				}
+				else if (keyH.greenMoveDown) {
+					direction = "down";
+					moving = true;
+				}
+				else if (keyH.greenMoveLeft) {
+					direction = "left";
+					moving = true;
+				}
+				else if (keyH.greenMoveRight) {
+					direction = "right";
+					moving = true;
+				}
 			}
 
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
 
-			if(collisionOn == false) {
+			if(collisionOn == false && moving) {
 				switch(direction) {
 				case "up":
 					screenY -= speed;
@@ -74,6 +99,7 @@ public class Tank {
 					screenX += speed;
 					break;
 				}
+				moving = false;
 			}
 
 			spriteCounter++;

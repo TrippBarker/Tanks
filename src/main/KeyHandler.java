@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 	
-	public boolean moveUp, moveDown, moveLeft, moveRight, fireUp, fireDown, fireLeft, fireRight;
+	public boolean redMoveUp, redMoveDown, redMoveLeft, redMoveRight, greenMoveUp, greenMoveDown, greenMoveLeft, greenMoveRight, fireUp, fireDown, fireLeft, fireRight;
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -15,28 +15,28 @@ public class KeyHandler implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		if (code == KeyEvent.VK_W) {
-			moveUp = true;
+			redMoveUp = true;
 		}
 		if (code == KeyEvent.VK_S) {
-			moveDown = true;
+			redMoveDown = true;
 		}
 		if (code == KeyEvent.VK_A) {
-			moveLeft = true;
+			redMoveLeft = true;
 		}
 		if (code == KeyEvent.VK_D) {
-			moveRight = true;
+			redMoveRight = true;
 		}
 		if (code == KeyEvent.VK_UP) {
-			fireUp = true;
+			greenMoveUp = true;
 		}
 		if (code == KeyEvent.VK_DOWN) {
-			fireDown = true;
+			greenMoveDown = true;
 		}
 		if (code == KeyEvent.VK_LEFT) {
-			fireLeft = true;
+			greenMoveLeft = true;
 		}
 		if (code == KeyEvent.VK_RIGHT) {
-			fireRight = true;
+			greenMoveRight = true;
 		}
 	}
 
@@ -44,28 +44,28 @@ public class KeyHandler implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		if (code == KeyEvent.VK_W) {
-			moveUp = false;
+			redMoveUp = false;
 		}
 		if (code == KeyEvent.VK_S) {
-			moveDown = false;
+			redMoveDown = false;
 		}
 		if (code == KeyEvent.VK_A) {
-			moveLeft = false;
+			redMoveLeft = false;
 		}
 		if (code == KeyEvent.VK_D) {
-			moveRight = false;
+			redMoveRight = false;
 		}
 		if (code == KeyEvent.VK_UP) {
-			fireUp = false;
+			greenMoveUp = false;
 		}
 		if (code == KeyEvent.VK_DOWN) {
-			fireDown = false;
+			greenMoveDown = false;
 		}
 		if (code == KeyEvent.VK_LEFT) {
-			fireLeft = false;
+			greenMoveLeft = false;
 		}
 		if (code == KeyEvent.VK_RIGHT) {
-			fireRight = false;
+			greenMoveRight = false;
 		}
 		
 	}

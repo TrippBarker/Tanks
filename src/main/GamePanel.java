@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public GreenTank greenTank = new GreenTank(this, keyH, "greenTank");
+	public GreenGun greenGun = new GreenGun(this, keyH);
 	public RedTank redTank = new RedTank(this, keyH, "redTank");
 	//public PlayerGun playerGun = new PlayerGun(this, keyH);
 	//public PlayerBullet playerBullet = new PlayerBullet(this, keyH);
@@ -81,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void update() {
 		greenTank.update();
+		greenGun.update();
 		redTank.update();
 		//playerGun.update();
 		//playerBullet.update();
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		tileM.draw(g2);
 		greenTank.draw(g2);
+		greenGun.draw(g2);
 		redTank.draw(g2);
 		//playerGun.draw(g2);
 		//playerBullet.draw(g2);
