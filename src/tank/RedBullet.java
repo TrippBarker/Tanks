@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class GreenBullet extends Bullet{
+public class RedBullet extends Bullet{
 	
-	public GreenBullet(GamePanel gp, KeyHandler keyH) {
+	public RedBullet(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
 		
