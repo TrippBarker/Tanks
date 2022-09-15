@@ -26,6 +26,7 @@ public abstract class Tank {
 	public int spriteNum = 1;
 	public Rectangle solidArea;
 	public boolean collisionOn = false;
+	public boolean explosionStarted = false;
 	
 	public void getPlayerImage() {
 		try {
@@ -43,7 +44,10 @@ public abstract class Tank {
 	}
 	
 	public void update () {
-
+		if (lifePoints == 0) {
+			gp.sHandler.tankDied(this);
+			explosionStarted = true;
+		}
 		if ((keyH.redMoveUp == true || keyH.redMoveDown == true || keyH.redMoveLeft == true || keyH.redMoveRight == true ||
 			keyH.greenMoveUp == true || keyH.greenMoveDown == true || keyH.greenMoveLeft == true || keyH.greenMoveRight == true) &&
 			lifePoints > 0) {

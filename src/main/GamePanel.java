@@ -9,7 +9,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import tank.*;
-import tile.TileManager;
+import main.*;
+import tile.*;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -35,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public BulletHitChecker bhChecker = new BulletHitChecker(this);
+	public SmokeHandler sHandler = new SmokeHandler(this);
 	public GreenTank greenTank = new GreenTank(this, keyH, "greenTank");
 	public GreenGun greenGun = new GreenGun(this, keyH);
 	public GreenBullet greenBullet = new GreenBullet(this, keyH);
@@ -86,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
 		redGun.update();
 		redBullet.update();
 		greenBullet.update();
+		sHandler.update();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -98,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable{
 		greenGun.draw(g2);
 		redTank.draw(g2);
 		redGun.draw(g2);
+		sHandler.draw(g2);
 		g2.dispose();
 		
 	}
