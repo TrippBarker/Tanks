@@ -10,11 +10,12 @@ import tank.RedTank;
 import tank.Tank;
 
 public class SmokeHandler {
-	public int screenX, screenY;
 	public boolean tankDied = false;
 	GamePanel gp;
 	public BufferedImage smoke1, smoke2, smoke3, smoke4;
 	public int imageTimer = 0;
+	public int screenX = -48;
+	public int screenY = 0;
 	
 	public SmokeHandler(GamePanel gp) {
 		this.gp = gp;
