@@ -77,10 +77,12 @@ public class BulletHitChecker {
 				gp.greenTank.lifePoints--;
 				gp.greenGun.lifePoints--;
 				gp.greenBullet.lifePoints--;
+				gp.greenHealth.updatePoints(gp.greenTank.lifePoints);
 			} else {
 				gp.redTank.lifePoints--;
 				gp.redGun.lifePoints--;
 				gp.redBullet.lifePoints--;
+				gp.redHealth.updatePoints(gp.redTank.lifePoints);
 			}
 		}
 		if (gp.tileM.tiles[tileNum1].flyOver == false || gp.tileM.tiles[tileNum2].flyOver == false || collisionWithEnt) {

@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public RedTank redTank = new RedTank(this, keyH, "redTank");
 	public RedGun redGun = new RedGun(this, keyH);
 	public RedBullet redBullet = new RedBullet(this, keyH);
+	public HealthBar greenHealth = new HealthBar(this);
+	public HealthBar redHealth = new HealthBar(this);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -102,6 +104,10 @@ public class GamePanel extends JPanel implements Runnable{
 		redTank.draw(g2);
 		redGun.draw(g2);
 		sHandler.draw(g2);
+		greenHealth.draw(g2);
+		redHealth.draw(g2);
+		greenHealth.updatePos(greenTank.screenX, greenTank.screenY);
+		redHealth.updatePos(redTank.screenX, redTank.screenY);
 		g2.dispose();
 		
 	}

@@ -48,6 +48,7 @@ public abstract class Tank {
 			gp.sHandler.tankDied(this);
 			explosionStarted = true;
 		}
+		System.out.println(lifePoints);
 		if ((keyH.redMoveUp == true || keyH.redMoveDown == true || keyH.redMoveLeft == true || keyH.redMoveRight == true ||
 			keyH.greenMoveUp == true || keyH.greenMoveDown == true || keyH.greenMoveLeft == true || keyH.greenMoveRight == true) &&
 			lifePoints > 0) {
@@ -85,6 +86,7 @@ public abstract class Tank {
 					direction = "right";
 					moving = true;
 				}
+				
 			}
 
 			collisionOn = false;
