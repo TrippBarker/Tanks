@@ -44,7 +44,7 @@ public abstract class Tank {
 	}
 	
 	public void update () {
-		if (lifePoints == 0) {
+		if (lifePoints <= 0) {
 			gp.sHandler.tankDied(this);
 			explosionStarted = true;
 		}
