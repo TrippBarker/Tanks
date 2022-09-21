@@ -72,9 +72,6 @@ public class TileManager {
 				col = 0;
 				row++;
 			}
-			for (String nums: numsArray) {
-				System.out.println(nums);
-			}
 		}
 		catch(Exception e) {	
 		}

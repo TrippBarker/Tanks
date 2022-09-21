@@ -14,7 +14,7 @@ public class HealthBar {
 	public int screenY;
 	public int lifePoints = 3;
 	
-	public BufferedImage zero, one, two, three;
+	public BufferedImage zeroBars, oneBar, twoBars, threeBars;
 	
 	public HealthBar(GamePanel gp) {
 		this.gp = gp;
@@ -23,10 +23,10 @@ public class HealthBar {
 	
 	public void getLifeImage() {
 		try {
-			zero = ImageIO.read(getClass().getResourceAsStream("/sprites/health/0health.png"));
-			one = ImageIO.read(getClass().getResourceAsStream("/sprites/health/1health.png"));
-			two = ImageIO.read(getClass().getResourceAsStream("/sprites/health/2health.png"));
-			three = ImageIO.read(getClass().getResourceAsStream("/sprites/health/3health.png"));
+			zeroBars = ImageIO.read(getClass().getResourceAsStream("/sprites/health/0health.png"));
+			oneBar = ImageIO.read(getClass().getResourceAsStream("/sprites/health/1health.png"));
+			twoBars = ImageIO.read(getClass().getResourceAsStream("/sprites/health/2health.png"));
+			threeBars = ImageIO.read(getClass().getResourceAsStream("/sprites/health/3health.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -45,16 +45,16 @@ public class HealthBar {
 		BufferedImage image = null;
 		switch (lifePoints) {
 		case 3:
-			image = three;
+			image = threeBars;
 			break;
 		case 2:
-			image = two;
+			image = twoBars;
 			break;
 		case 1:
-			image = one;
+			image = oneBar;
 			break;
-		case 0:
-			image = zero;
+		default:
+			image = zeroBars;
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
