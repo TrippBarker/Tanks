@@ -51,7 +51,6 @@ public class SmokeHandler {
 	}
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
-		System.out.println(imageTimer);
 		if(imageTimer <= 20) {
 			image = smoke1;
 		} else if (imageTimer <= 40) {
