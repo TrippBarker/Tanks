@@ -11,22 +11,30 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public abstract class Bullet {
+public class Bullet {
 	GamePanel gp;
 	KeyHandler keyH;
 	String firingDir;
 	int timeTilNextFire;
 	public boolean firing = false;
-	public Rectangle solidArea;
+	public Rectangle solidArea = new Rectangle(21, 21, 12, 12);;
 	public Tank tankName;
 	public int timeTilNextShot = 0;
 	public int lifePoints = 3;
-	public int screenX;
-	public int screenY;
-	public int speed;
-	public String direction;
+	public int screenX = 0;
+	public int screenY = 0;
+	public int speed = 6;
+	public String direction = "right";
 	public BufferedImage up, down, left, right;
 	public boolean collisionOn = false;
+	
+	public Bullet(GamePanel gp, KeyHandler keyH, Tank tankName) {
+		this.gp = gp;
+		this.keyH = keyH;
+		this.tankName = tankName;
+		
+		getPlayerImage();
+	}
 	
 	public void getPlayerImage() {
 		try {
@@ -60,7 +68,7 @@ public abstract class Bullet {
 		if (((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
 			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true))
 				&& timeTilNextShot <= 0 && !firing && lifePoints > 0) {
-				if (this instanceof RedBullet) {
+				if (tankName instanceof RedTank) {
 					if (keyH.redFireUp) {
 						direction = "up";
 						firing = true;
@@ -81,7 +89,7 @@ public abstract class Bullet {
 					}
 				}
 				
-				if (this instanceof GreenBullet) {
+				if (tankName instanceof GreenTank) {
 					if (keyH.greenFireUp) {
 						direction = "up";
 						firing = true;

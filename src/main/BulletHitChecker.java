@@ -1,8 +1,8 @@
 package main;
 
 import tank.Bullet;
-import tank.GreenBullet;
-import tank.RedBullet;
+import tank.GreenTank;
+import tank.RedTank;
 
 public class BulletHitChecker {
 	GamePanel gp;
@@ -27,7 +27,7 @@ public class BulletHitChecker {
 		int otherTankTopY = gp.greenTank.screenY + gp.greenTank.solidArea.y;
 		int otherTankBottomY = gp.greenTank.screenY + gp.greenTank.solidArea.y + gp.greenTank.solidArea.height;
 		
-		if(bullet instanceof GreenBullet) {
+		if(bullet.tankName instanceof GreenTank) {
 			bulletLeftX = gp.greenBullet.screenX + gp.greenBullet.solidArea.x;
 			bulletRightX = gp.greenBullet.screenX + gp.greenBullet.solidArea.x + gp.greenBullet.solidArea.width;
 			bulletTopY = gp.greenBullet.screenY + gp.greenBullet.solidArea.y;
@@ -73,7 +73,7 @@ public class BulletHitChecker {
 		   bulletLeftX < otherTankRightX && bulletTopY < otherTankBottomY && bulletBottomY > otherTankTopY && bulletRightX > otherTankLeftX ||
 		   bulletRightX > otherTankLeftX && bulletTopY < otherTankBottomY && bulletBottomY > otherTankTopY && bulletLeftX < otherTankRightX) {
 			collisionWithEnt = true;
-			if (bullet instanceof RedBullet) {
+			if (bullet.tankName instanceof RedTank) {
 				gp.greenTank.lifePoints--;
 				gp.greenGun.lifePoints--;
 				gp.greenBullet.lifePoints--;

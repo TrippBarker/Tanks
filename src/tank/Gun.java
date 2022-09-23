@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-public abstract class Gun {
+public class Gun {
 	GamePanel gp;
 	KeyHandler keyH;
 	
@@ -20,15 +20,26 @@ public abstract class Gun {
 	public String name;
 	public Tank tankName;
 	public int lifePoints = 3;
+	public String startDir;
 	
 	public BufferedImage up, down, left, right;
 	
+	public Gun(GamePanel gp, KeyHandler keyH, Tank tankName, String startDir) {
+		this.gp = gp;
+		this.keyH = keyH;
+		this.tankName = tankName;
+		this.startDir = startDir;
+		
+		setDefaultValues();
+		getGunImage();
+	}
+	
 	public void getGunImage() {
 		try {
-			up = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/fireGunUp.png"));
-			down = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/fireGunDown.png"));
-			left = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/fireGunLeft.png"));
-			right = ImageIO.read(getClass().getResourceAsStream("/sprites/" + name + "/fireGunRight.png"));
+			up = ImageIO.read(getClass().getResourceAsStream("/sprites/" + tankName.name + "/fireGunUp.png"));
+			down = ImageIO.read(getClass().getResourceAsStream("/sprites/" + tankName.name + "/fireGunDown.png"));
+			left = ImageIO.read(getClass().getResourceAsStream("/sprites/" + tankName.name + "/fireGunLeft.png"));
+			right = ImageIO.read(getClass().getResourceAsStream("/sprites/" + tankName.name + "/fireGunRight.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +51,7 @@ public abstract class Gun {
 		if ((keyH.redFireUp == true || keyH.redFireDown == true || keyH.redFireLeft == true || keyH.redFireRight == true ||
 			keyH.greenFireUp == true || keyH.greenFireDown == true || keyH.greenFireLeft == true || keyH.greenFireRight == true) &&
 			lifePoints > 0) {
-			if (this instanceof RedGun) {
+			if (tankName instanceof RedTank) {
 				if (keyH.redFireUp) {
 					fireDirection = "up";
 				} else if (keyH.redFireDown) {
@@ -52,7 +63,7 @@ public abstract class Gun {
 				}
 			}
 			
-			if (this instanceof GreenGun) {
+			if (tankName instanceof GreenTank) {
 				if (keyH.greenFireUp) {
 					fireDirection = "up";
 				} else if (keyH.greenFireDown) {
@@ -83,5 +94,14 @@ public abstract class Gun {
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+	}
+	
+	public void setDefaultValues() {
+		// pair position with the tank body
+		screenX = tankName.screenX;
+		screenY = tankName.screenY;
+		// Defines starting direction
+		direction = startDir;
+		fireDirection = startDir;
 	}
 }

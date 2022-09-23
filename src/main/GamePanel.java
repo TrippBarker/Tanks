@@ -2,14 +2,12 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import 
-java.awt.Graphics;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
 import tank.*;
-import main.*;
 import tile.*;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -38,12 +36,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public BulletHitChecker bhChecker = new BulletHitChecker(this);
 	public SmokeHandler sHandler = new SmokeHandler(this);
 	public GreenTank greenTank = new GreenTank(this, keyH, "greenTank");
-	public GreenGun greenGun = new GreenGun(this, keyH);
-	public GreenBullet greenBullet = new GreenBullet(this, keyH);
-	public RedTank redTank = new RedTank(this, keyH, "redTank");
-	public RedGun redGun = new RedGun(this, keyH);
-	public RedBullet redBullet = new RedBullet(this, keyH);
+	public Gun greenGun = new Gun(this, keyH, greenTank, "left");
+	public Bullet greenBullet = new Bullet(this, keyH, greenTank);
 	public HealthBar greenHealth = new HealthBar(this);
+	public RedTank redTank = new RedTank(this, keyH, "redTank");
+	public Gun redGun = new Gun(this, keyH, redTank, "right");
+	public Bullet redBullet = new Bullet(this, keyH, redTank);
 	public HealthBar redHealth = new HealthBar(this);
 	
 	public GamePanel() {
